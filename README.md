@@ -1,0 +1,1 @@
+Wagtail-Django-Static-Blog
