@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <a href="{{ page.get_parent.url }}"> Return to blog </a> <br/>
+    <a href="{{ page.get_parent.url }}"> Return to index </a> <br/>
     <h1>{{ page.title }}</h1>
 
     <!-- Categories -->
@@ -33,6 +33,42 @@
           {% endfor %}
       </div>
     {% endif %}
+
+    <!-- Blocks, accutaly main content here -->
+    <main>
+      {% for block in page.body %}
+
+        {% if block.block_type == 'heading' %}
+          <header class="header">
+            <h2>{{ block.value }}</h2>
+          </header>
+        {% elif block.block_type == 'image' %}
+          <div class="image container">
+          </div>
+        {% elif block.block_type == 'gallery' %}
+
+          <div class="image_gallery_container">
+            {% if block.value %}
+              {% for image_instance in block.value %}
+                {% if image_instance.block_type == 'image' %}
+
+                    {% image image_instance.value fill-200x200 as img %}
+                    <img class="gallery_image" src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
+
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+          
+        {% else %}
+          <section class="block-{{ block.block_type }}">
+            {{ block }}
+          </section>
+        {% endif %}
+
+      {% endfor %}
+    </main>
+
 
 
 {% endblock %}
