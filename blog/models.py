@@ -19,6 +19,11 @@ class BlogIndexPage(Page):
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
+
+        ('gallery', blocks.StreamBlock(
+            [
+                ('image', ImageChooserBlock()),
+            ], label='image gallery' )),
     ])
 
     content_panels = Page.content_panels + [
@@ -68,8 +73,10 @@ class BlogPage(Page):
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
 
-        
-
+        ('gallery', blocks.StreamBlock(
+            [
+                ('image', ImageChooserBlock()),
+            ], label='image gallery' )),
     ])
 
     content_panels = Page.content_panels + [
