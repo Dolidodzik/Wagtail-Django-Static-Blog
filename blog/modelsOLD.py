@@ -1,7 +1,7 @@
 from django.db import models
 from wagtail.core.models import Page, Orderable
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
+from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
@@ -9,21 +9,22 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 from wagtail.snippets.models import register_snippet
 from django import forms
-from wagtail.core import blocks
-from wagtail.images.blocks import ImageChooserBlock
 
 
-# Root/main/home page of whole app under root URL
+# Root/main/home page of whole app, url is "/", this page links to subpages
 class BlogIndexPage(Page):
-    body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
-    ])
+    intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        FieldPanel('intro', classname="full")
     ]
+
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        blogpages = self.get_children().live().order_by('-first_published_at')
+        context['blogpages'] = blogpages
+        return context
 
 
 # Tag that SHOULD be used in each BlogPage
@@ -34,7 +35,8 @@ class BlogPageTag(TaggedItemBase):
         on_delete=models.CASCADE
     )
 
-# Category of BlogPage (similiar to tag)
+
+# Category of blog
 @register_snippet
 class BlogCategory(models.Model):
     name = models.CharField(max_length=255)
@@ -55,27 +57,30 @@ class BlogCategory(models.Model):
         verbose_name_plural = 'blog categories'
 
 
-
-
-# Standard blog page with text/images etc.
+# Standard blog page that should be created for every new post
 class BlogPage(Page):
-    date = models.DateField(auto_now=True)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
 
-    body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+    def main_image(self):
+        gallery_item = self.gallery_images.first()
+        if gallery_item:
+            return gallery_item.image
+        else:
+            return None
 
-        
-
-    ])
+    search_fields = Page.search_fields + [
+        index.SearchField('intro'),
+        index.SearchField('body'),
+    ]
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
+            FieldPanel('date'),
             FieldPanel('tags'),
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="Blog information"),
-        StreamFieldPanel('body'),
+        FieldPanel('intro'),
+        FieldPanel('body'),
+        InlinePanel('gallery_images', label="Gallery images"),
     ]
