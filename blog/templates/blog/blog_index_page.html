@@ -22,10 +22,13 @@
 
 
     {% for post in page.get_children.specific %}
-        ONE {{ post.title }}
+
+        <a href="{% pageurl post %}"> {{ post.title }} </a>
+
+        <!-- Blocks if needed -->
         {% for block in post.body %}
-          TWO
         {% endfor %}
+
     {% endfor %}
 
 {% endblock %}
