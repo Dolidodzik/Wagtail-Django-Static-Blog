@@ -6,8 +6,10 @@
 
 {% block content %}
 
+    <a href="{{ page.get_parent.url }}"> Return to blog </a> <br/>
     <h1>{{ page.title }}</h1>
 
+    <!-- Categories -->
     {% with categories=page.categories.all %}
       {% if categories %}
           <h3> Category of this post is: </h3>
@@ -21,6 +23,16 @@
           </ul>
       {% endif %}
     {% endwith %}
+
+    <!-- Tags -->
+    {% if page.tags.all.count %}
+      <div class="tags">
+          <h3>Tags</h3>
+          {% for tag in page.tags.all %}
+              <a href="#"> {{ tag }} </a>
+          {% endfor %}
+      </div>
+    {% endif %}
 
 
 {% endblock %}
