@@ -52,14 +52,16 @@
               {% for image_instance in block.value %}
                 {% if image_instance.block_type == 'image' %}
 
-                    {% image image_instance.value fill-200x200 as img %}
-                    <img class="gallery_image" src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
+                    {% image image_instance.value fill-1000x1000 as img %}
+                    {% image image_instance.value fill-200x200 as img_miniature %}
+                    <img class="gallery_image" src="{{ img_miniature.url }}" width="250" height="250"
+                      data-imagebox="gallery" data-imagebox-src="{{ img.url }}">
 
                 {% endif %}
               {% endfor %}
             {% endif %}
           </div>
-          
+
         {% else %}
           <section class="block-{{ block.block_type }}">
             {{ block }}

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls import include, url
+from django.urls import path
 from django.contrib import admin
 
 from wagtail.admin import urls as wagtailadmin_urls
@@ -8,7 +9,12 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from search import views as search_views
 
+from django.shortcuts import render
+
 urlpatterns = [
+    # Adding way to login with google (for standard users)
+    url(r'social-auth/', include('social_django.urls', namespace='social')),
+
     url(r'^django-admin/', admin.site.urls),
 
     url(r'^admin/', include(wagtailadmin_urls)),
@@ -20,12 +26,11 @@ urlpatterns = [
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
     url(r'', include(wagtail_urls)),
-
-    # Alternatively, if you want Wagtail pages to be served from a subpath
-    # of your site, rather than the site root:
-    #    url(r'^pages/', include(wagtail_urls)),
 ]
 
+# Simple view that allows users to login with google
+def home(request):
+	return render(request, 'home.html')
 
 if settings.DEBUG:
     from django.conf.urls.static import static

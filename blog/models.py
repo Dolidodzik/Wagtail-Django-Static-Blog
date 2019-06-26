@@ -60,8 +60,6 @@ class BlogCategory(models.Model):
         verbose_name_plural = 'blog categories'
 
 
-
-
 # Standard blog page with text/images etc.
 class BlogPage(Page):
     date = models.DateField(auto_now=True)

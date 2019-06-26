@@ -8,6 +8,15 @@
 
     <h1>{{ page.title }}</h1>
 
+    <!--{% if user.is_authenticated %}
+           <p class="display-4"> Hello, {{ user.username }} </p>
+           {% for name in social_auth.backends.oauth2 %}
+   <li><a rel="nofollow" href="{% url "socialauth_begin" %}">{{ name|title }}</a></li>
+{% endfor %}
+    {% else %}
+           <a class="lead" href="{% url 'socialauth_complete' %}"> Login </a>
+    {% endif %}-->
+
     {% with blocks=self.body %}
       {% for block in blocks %}
           {% if block.block_type == 'heading' %}
