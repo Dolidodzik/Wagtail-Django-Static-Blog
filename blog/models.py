@@ -65,6 +65,13 @@ class BlogPage(Page):
     date = models.DateField(auto_now=True)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
+    miniature = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='miniature'
+    )
 
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
@@ -79,6 +86,7 @@ class BlogPage(Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
+            ImageChooserPanel('miniature'),
             FieldPanel('tags'),
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="Blog information"),

@@ -32,7 +32,12 @@
 
     {% for post in page.get_children.specific %}
 
-        <a href="{% pageurl post %}"> {{ post.title }} </a>
+        <a href="{% pageurl post %}">
+          {{ post.title }}
+          {% image post.miniature fill-1000x1000 %}
+        </a>
+
+
 
         <!-- Blocks if needed -->
         {% for block in post.body %}
