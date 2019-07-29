@@ -31,6 +31,18 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
+
+        <br/>
+        {% if user.is_authenticated %}
+          <p> Hello, {{ user.username }} </p> <br/>
+        {% else %}
+          <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}" > Log in </a>
+        {% endif %}
+        <br/><br/>
+
+        Logout: <a href="{% url 'logout' %}?next={{ request.get_full_path|urlencode }}"> Logout </a>
+        <br/><br/>
+
         {% wagtailuserbar %}
 
         {% block content %}{% endblock %}
@@ -41,5 +53,6 @@
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
+
     </body>
 </html>

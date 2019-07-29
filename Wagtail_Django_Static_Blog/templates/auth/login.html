@@ -1,11 +1,2 @@
-
-
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-   <br>
-  <p><strong>-- OR --</strong></p>
-  <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+<!-- Lets redirect user to last vistied page after login -->
+<a href="{% url 'social:begin' 'google-oauth2' %}?next={{ next_page|urlencode }}"> Login with Google </a><br>

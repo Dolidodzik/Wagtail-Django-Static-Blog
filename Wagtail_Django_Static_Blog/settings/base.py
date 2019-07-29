@@ -64,6 +64,8 @@ MIDDLEWARE = [
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'Wagtail_Django_Static_Blog.urls'
@@ -159,9 +161,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-# Settings that allows me to login with Google
+# Settings that allows me to redirect user when logging in/out
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = "/"
+
+# This will let me to redirect user to his last visited page after login
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.request",
+)
 
 # google social auth keys
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='721800581317-c2vn822up2ojv7daji27r1khhg6kpjg8.apps.googleusercontent.com'

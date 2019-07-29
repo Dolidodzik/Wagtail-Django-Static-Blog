@@ -10,14 +10,17 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 
 from django.shortcuts import render
-
 from . import views
+from django.contrib.auth.views import LogoutView
+
 
 urlpatterns = [
     # Adding way to login with google (for non-admin users)
     url(r'^login/$', views.login, name='login'),
-    url(r'^logout/$', views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
+
+    # Page that simply logouts user and redirects to "/"
+    url(r'^logout/$', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
     url(r'^django-admin/', admin.site.urls),
 
@@ -31,10 +34,6 @@ urlpatterns = [
     # the list:
     url(r'', include(wagtail_urls)),
 ]
-
-# Simple view that allows users to login with google
-def home(request):
-	return render(request, 'home.html')
 
 if settings.DEBUG:
     from django.conf.urls.static import static
