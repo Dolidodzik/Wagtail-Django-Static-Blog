@@ -11,9 +11,13 @@ from search import views as search_views
 
 from django.shortcuts import render
 
+from . import views
+
 urlpatterns = [
-    # Adding way to login with google (for standard users)
-    url(r'social-auth/', include('social_django.urls', namespace='social')),
+    # Adding way to login with google (for non-admin users)
+    url(r'^login/$', views.login, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^auth/', include('social_django.urls', namespace='social')),
 
     url(r'^django-admin/', admin.site.urls),
 
