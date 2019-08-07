@@ -12,6 +12,9 @@ from django import forms
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
+from django.shortcuts import render
+
+
 
 # Root/main/home page of whole app under root URL
 class BlogIndexPage(Page):
@@ -58,6 +61,7 @@ class BlogCategory(models.Model):
 
     class Meta:
         verbose_name_plural = 'blog categories'
+
 
 
 # Standard blog page with text/images etc.

@@ -15,6 +15,9 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
+
+    # Done with disqus, no need mroe django-social
+
     # Adding way to login with google (for non-admin users)
     url(r'^login/$', views.login, name='login'),
     url(r'^auth/', include('social_django.urls', namespace='social')),

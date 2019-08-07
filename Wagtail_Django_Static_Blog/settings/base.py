@@ -194,3 +194,6 @@ AUTHENTICATION_BACKENDS = (
  'social_core.backends.facebook.FacebookOAuth2',
  'django.contrib.auth.backends.ModelBackend',
 )
+
+# Settting app that will handle comments
+COMMENTS_APP = 'django_comments_xtd'
