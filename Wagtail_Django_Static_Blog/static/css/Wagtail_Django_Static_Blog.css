@@ -11,3 +11,30 @@ body{
 .block-paragraph{
 
 }
+
+.blog-posts-spacer{
+  margin-bottom: 80px;
+}
+
+.post{
+  text-decoration: underline;
+  color: inherit;
+  cursor: pointer;
+  margin-top: 75px;
+}
+
+.post-header{
+  margin-bottom: 8px;
+}
+
+.single-image{
+  margin-bottom: 40px;
+  margin-top: 10px;
+}
+
+/* Appling img fluid + paddings to every image on page */
+img{
+  max-width: 100%;
+  height: auto;
+  margin: 10px auto;
+}
