@@ -6,55 +6,48 @@
 
 {% block content %}
 
-    <div class="row">
+  <div class="index-page-container">
+
+      <div class="row">
+      </div>
+
+      {% with blocks=self.body %}
+        {% for block in blocks %}
+            {% if block.block_type == 'heading' %}
+              <header class="row">
+                <h2 class="heading col-12"> {{ block.value }} </h2>
+              </header>
+            {% elif block.block_type == 'image' %}
+              {% image block.value original as image %}
+              <div class="row">
+                <img src="{{image.url}}" class="single-image" />
+              </div>
+            {% else %}
+               <section class="block-{{ block.block_type }} row">
+                 {{ block }}
+               </section>
+            {% endif %}
+        {% endfor %}
+      {% endwith %}
+
+      <div class="blog-posts-spacer"></div>
+
+      {% for post in page.get_children.specific %}
+
+          <a href="{% pageurl post %}" class="post row">
+            <header class="col-12 post-header">
+              <h3> {{ post.title }} </h3>
+            </header>
+            {% image post.miniature fill-1000x1000 as miniature %}
+            <img src="{{ miniature.url }}" class="no-single-lightbox col-12" />
+          </a>
+
+          <!-- Blocks if needed -->
+          {% for block in post.body %}
+          {% endfor %}
+
+      {% endfor %}
 
     </div>
-
-    {% with blocks=self.body %}
-      {% for block in blocks %}
-          {% if block.block_type == 'heading' %}
-            <header class="row">
-              <h2 class="heading col-12"> {{ block.value }} </h2>
-            </header>
-          {% elif block.block_type == 'image' %}
-            {% image block.value original as image %}
-            <img src="{{image.url}}" class="single-image" />
-          {% else %}
-             <section class="block-{{ block.block_type }}">
-               {{ block }}
-             </section>
-          {% endif %}
-      {% endfor %}
-    {% endwith %}
-
-    <div class="blog-posts-spacer"></div>
-
-    {% for post in page.get_children.specific %}
-
-        <a href="{% pageurl post %}" class="post row">
-          <header class="col-12 post-header">
-            <h3> {{ post.title }} </h3>
-          </header>
-          {% image post.miniature fill-1000x1000 as miniature %}
-          <img src="{{ miniature.url }}" class="no-lightbox col-12" />
-        </a>
-
-        <!-- Blocks if needed -->
-        {% for block in post.body %}
-        {% endfor %}
-
-    {% endfor %}
-
-    <script>
-      /* Removing data-imagebox from marked elements */
-      $('.no-lightbox').removeAttr('data-imagebox')
-
-      /* Adding data-imagebox attr to every image (adding single lightbox to every image, excluding those where no-lightbox is first class) */
-      jQuery('img').each(function () {
-        if(this.classList[0]!="no-lightbox"){
-          $(this).attr('data-imagebox', "");
-        }
-      });
-    </script>
 
 {% endblock %}

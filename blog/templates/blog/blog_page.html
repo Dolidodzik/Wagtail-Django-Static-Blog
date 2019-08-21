@@ -6,56 +6,36 @@
 
 {% block content %}
 
-    <a href="{{ page.get_parent.url }}"> Return to index </a> <br/>
-    <h1>{{ page.title }}</h1>
-
-    <!-- Categories -->
-    {% with categories=page.categories.all %}
-      {% if categories %}
-          <h3> Category of this post is: </h3>
-          <ul>
-              {% for category in categories %}
-                  <li style="display: inline">
-                      {% image category.icon fill-32x32 style="vertical-align: middle" %}
-                      {{ category.name }}
-                  </li>
-              {% endfor %}
-          </ul>
-      {% endif %}
-    {% endwith %}
-
-    <!-- Tags -->
-    {% if page.tags.all.count %}
-      <div class="tags">
-          <h3>Tags</h3>
-          {% for tag in page.tags.all %}
-              <a href="#"> {{ tag }} </a>
-          {% endfor %}
-      </div>
-    {% endif %}
+    <div class="row">
+    </div>
 
     <!-- Blocks, accutaly main content here -->
-    <main>
+    <main class="post-body">
       {% for block in page.body %}
 
         {% if block.block_type == 'heading' %}
-          <header class="header">
-            <h2>{{ block.value }}</h2>
+          <header class="row">
+            <h2 class="heading">{{ block.value }}</h2>
           </header>
         {% elif block.block_type == 'image' %}
-          <div class="image container">
+          {% image block.value original as image %}
+          <div class="row">
+            <img src="{{image.url}}" class="single-image" />
           </div>
         {% elif block.block_type == 'gallery' %}
 
-          <div class="image_gallery_container">
+          <div class="image-gallery-container row">
+            <h3 class="col-12"> Gallery: </h3>
             {% if block.value %}
               {% for image_instance in block.value %}
                 {% if image_instance.block_type == 'image' %}
 
-                    {% image image_instance.value fill-1000x1000 as img %}
-                    {% image image_instance.value fill-200x200 as img_miniature %}
-                    <img class="gallery_image" src="{{ img_miniature.url }}" width="250" height="250"
-                      data-imagebox="gallery" data-imagebox-src="{{ img.url }}">
+                    <div class="image-wrapper col-4">
+                      {% image image_instance.value original as img %}
+                      {% image image_instance.value fill-1000x1000 as img_miniature %}
+                      <img class="no-single-lightbox gallery-image" src="{{ img_miniature.url }}"
+                        data-imagebox="gallery" data-imagebox-src="{{ img.url }}">
+                    </div>
 
                 {% endif %}
               {% endfor %}
@@ -71,13 +51,43 @@
       {% endfor %}
     </main>
 
-    <section class="comments">
+    <!-- Categories -->
+    <section class="categories row">
+      {% with categories=page.categories.all %}
+        {% if categories %}
+          <h3 class="col-12"> Category of this post is: </h3>
+            {% for category in categories %}
+              <li style="display: inline" class="col-12 category">
+                  {% image category.icon fill-48x48 style="vertical-align: middle" class="no-single-lightbox" %}
+                  <b> {{ category.name }} </b>
+              </li>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </section>
 
-      {% include 'blog/comments.html' with blog=blog %}
-
+    <!-- Tags -->
+    <section class="tags row">
+      <div class="col-12">
+        {% if page.tags.all.count %}
+          <h3>Tags</h3>
+          {% for tag in page.tags.all %}
+            <a href="#"> #{{ tag }} </a>
+          {% endfor %}
+        {% endif %}
+      </div>
     </section>
 
 
 
+    <section class="comments row">
+      <div class="col-12">
+        {% include 'blog/comments.html' with blog=blog %}
+      </div>
+    </section>
+
+
+
+{% include 'blog/apply_lightbox_to_images.html' %}
 
 {% endblock %}

@@ -1,0 +1,11 @@
+<script>
+  /* Removing data-imagebox from marked elements */
+  $('.no-lightbox').removeAttr('data-imagebox')
+
+  /* Adding data-imagebox attr to every image (adding single lightbox to every image, excluding those where no-lightbox is first class) */
+  jQuery('img').each(function () {
+    if(this.classList[0]!="no-single-lightbox"){
+      $(this).attr('data-imagebox', "");
+    }
+  });
+</script>
