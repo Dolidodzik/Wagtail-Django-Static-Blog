@@ -6,7 +6,7 @@
 
 {% block content %}
 
-  <div class="index-page-container">
+  <div class="page-container">
 
       <div class="row">
       </div>
@@ -34,6 +34,9 @@
 
       {% for post in page.get_children.specific %}
 
+        <!-- Preventing showing contact page as one of posts -->
+        {% if post.socials %}
+        {% else %}
           <a href="{% pageurl post %}" class="post row">
             <header class="col-12 post-header">
               <h3> {{ post.title }} </h3>
@@ -45,6 +48,7 @@
           <!-- Blocks if needed -->
           {% for block in post.body %}
           {% endfor %}
+        {% endif %}
 
       {% endfor %}
 

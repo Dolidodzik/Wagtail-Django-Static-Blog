@@ -58,7 +58,6 @@ class BlogCategory(models.Model):
         verbose_name_plural = 'blog categories'
 
 
-
 # Standard blog page with text/images etc.
 class BlogPage(Page):
     date = models.DateField(auto_now=True)
@@ -89,5 +88,47 @@ class BlogPage(Page):
             FieldPanel('tags'),
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="Blog information"),
+        StreamFieldPanel('body'),
+    ]
+
+
+# Contact
+
+# Social snippet - one social can be twitter/instagram/link to other page
+@register_snippet
+class Social(models.Model):
+    name = models.CharField(max_length=255)
+    link = models.URLField(max_length=255)
+    icon = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('link'),
+        ImageChooserPanel('icon'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'contact socials'
+
+# Contact page
+class ContactPage(Page):
+
+    socials = ParentalManyToManyField('blog.Social', blank=True)
+
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+    ])
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('socials', widget=forms.CheckboxSelectMultiple),
+        ], heading="Socials linked in contact page"),
         StreamFieldPanel('body'),
     ]

@@ -27,12 +27,29 @@ body{
 
 .container{
   padding: 15px;
+  padding-bottom: 100px;
 }
 
 /* Appling img fluid + paddings to every image on page */
 img{
   max-width: 100%;
   height: auto;
+}
+
+
+/* Contact */
+.social-icon{
+}
+.social-name{
+}
+
+.socials{
+  font-size: 25px;
+  text-align: center;
+}
+
+.social-wrapper > a{
+  color: inherit;
 }
 
 /* Blog post */
@@ -66,8 +83,8 @@ img{
 }
 
 /* Homepage */
-.index-page-container{
-  padding: 10px;
+.page-container{
+  padding: 15px;
 }
 
 .heading{

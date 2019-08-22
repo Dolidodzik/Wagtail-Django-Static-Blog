@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %} template-blogindexpage {% endblock %}
+
+{% block content %}
+
+  <div class="page-container">
+
+    <div class="contact-margin-top"></div>
+    <div class="row"></div>
+
+    {% with blocks=self.body %}
+      {% for block in blocks %}
+          {% if block.block_type == 'heading' %}
+            <header class="row">
+              <h2 class="heading col-12"> {{ block.value }} </h2>
+            </header>
+          {% elif block.block_type == 'image' %}
+            {% image block.value original as image %}
+            <div class="row">
+              <img src="{{image.url}}" class="single-image" />
+            </div>
+          {% else %}
+             <section class="block-{{ block.block_type }} row">
+               {{ block }}
+             </section>
+          {% endif %}
+      {% endfor %}
+    {% endwith %}
+
+
+    <!-- Categories -->
+    <section class="socials">
+      {% with socials=page.socials.all %}
+        {% if socials %}
+            {% for social in socials %}
+              <li style="display: inline" class="col-12">
+                <div class="social-wrapper">
+                  <a href="{{social.link}}">
+                    <b class="social-name"> {{ social.name }}: </b>
+                  </a>
+                  {% image social.icon original style="vertical-align: middle" class="no-single-lightbox col-3 social-icon" %}
+                </div>
+              </li>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </section>
+
+  </div>
+
+{% endblock %}
