@@ -1,0 +1,30 @@
+
+/* Blog post */
+
+.categories{
+  margin-top: 50px;
+}
+
+.image-gallery-container{
+  margin-top: 40px;
+  margin-bottom: 25px;
+}
+
+.tags{
+  margin-top: 45px;
+  margin-bottom: 60px;
+  font-size: 21px;
+}
+
+.image-wrapper{
+  display: inline-block;
+  padding: 2px;
+  -moz-box-shadow:0 5px 5px rgba(182, 182, 182, 0.20);
+  -webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.20);
+  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.20);
+}
+
+.category{
+  margin-top: 15px;
+  font-size: 20px;
+}

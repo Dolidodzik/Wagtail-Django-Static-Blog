@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block body_class %} template-blogindexpage {% endblock %}
 
+<!-- Extra css -->
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static "blog/css/contact.css" %}"/>
+{% endblock %}
+
+<!-- Body -->
 {% block content %}
 
   <div class="page-container">

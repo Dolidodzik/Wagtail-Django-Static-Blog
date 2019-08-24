@@ -1,8 +1,4 @@
-/* This file will be included in every page  */
-
-/* ToDo - separate those css to separate files to increase loading speed  */
-
-/* This file - styles that will be included on every subpage */
+/* This file will be included on every page  */
 body{
   background-color: #f9f9f9 !important;
 }
@@ -19,10 +15,16 @@ body{
   -moz-box-shadow:0 5px 5px rgba(182, 182, 182, 0.45);
   -webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.45);
   box-shadow: 0 5px 5px rgba(182, 182, 182, 0.45);
+
 }
 
 .nav-link{
   color: black !important;
+  font-size: 21px !important;
+}
+
+.navbar-brand{
+  font-size: 25px !important;
 }
 
 .container{
@@ -36,83 +38,8 @@ img{
   height: auto;
 }
 
-
-/* Contact */
-.social-icon{
-}
-.social-name{
-}
-
-.socials{
-  font-size: 25px;
-  text-align: center;
-}
-
-.social-wrapper > a{
-  color: inherit;
-}
-
-/* Blog post */
-
-.categories{
-  margin-top: 50px;
-}
-
-.image-gallery-container{
-  margin-top: 40px;
-  margin-bottom: 25px;
-}
-
-.tags{
-  margin-top: 45px;
-  margin-bottom: 60px;
-  font-size: 21px;
-}
-
-.image-wrapper{
-  display: inline-block;
-  padding: 2px;
-  -moz-box-shadow:0 5px 5px rgba(182, 182, 182, 0.20);
-  -webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.20);
-  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.20);
-}
-
-.category{
-  margin-top: 15px;
-  font-size: 20px;
-}
-
-/* Homepage */
-.page-container{
-  padding: 15px;
-}
-
 .heading{
   margin-top: 100px;
   font-weight: 600;
   margin-bottom: 60px;
-}
-
-.block-paragraph{
-
-}
-
-.blog-posts-spacer{
-  margin-bottom: 80px;
-}
-
-.post{
-  text-decoration: underline;
-  color: inherit;
-  cursor: pointer;
-  margin-top: 75px;
-}
-
-.post-header{
-  margin-bottom: 8px;
-}
-
-.single-image{
-  margin-bottom: 40px;
-  margin-top: 10px;
 }
