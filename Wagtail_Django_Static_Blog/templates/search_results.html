@@ -4,6 +4,7 @@
 {% block title %}Search{% endblock %}
 
 {% block extra_css %}
+
   <style>
     .search_form{
       margin-top: 100px;
@@ -12,13 +13,11 @@
 
     .form-control{
       background: transparent;
-      border: none;
+      /*border: none;
       border-bottom: 1px solid #000000;
       -webkit-box-shadow: none;
       box-shadow: none;
-      border-radius: 0;
-
-      font-size: 20px;
+      border-radius: 0;*/
     }
 
     .form-control:focus{
@@ -40,9 +39,11 @@
       margin-bottom: 60px;
     }
 
-  </style>
+    .search_form > input[type="text"]{
+      font-size: 20px;
+    }
 
-  <script src="https://kit.fontawesome.com/ba3550c060.js"></script>
+  </style>
 
 {% endblock %}
 
@@ -53,12 +54,12 @@
       <div class="spacer col-1"></div>
 
       {% if search_query != None %}
-        <input type="text" name="query" value="{{ search_query }}" class="form-control col-7">
+        <input type="text" name="query" value="{{ search_query }}" class="form-control col-8">
       {% else %}
-        <input type="text" name="query" value="" class="form-control col-7">
+        <input type="text" name="query" value="" class="form-control col-8">
       {% endif %}
-      <button type="submit" value="Submit" class="btn btn-dark col-3">
-        Search!
+      <button type="submit" value="Submit" class="btn btn-dark col-2">
+        <i class="fa fa-search"></i>
       </button>
 
 

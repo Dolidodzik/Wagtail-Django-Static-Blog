@@ -24,6 +24,9 @@
        <script src="https://tobiasroeder.github.io/imagebox/addimagebox.js"></script>
 
 
+       <!-- Font awesome import -->
+       <script src="https://kit.fontawesome.com/ba3550c060.js"></script>
+
        {# Global stylesheets #}
        <link rel="stylesheet" type="text/css" href="{% static 'css/Wagtail_Django_Static_Blog.css' %}">
 
@@ -47,9 +50,28 @@
                     <a href="/contact" class="nav-link"> Contact </a>
                   </li><li class="nav-item">
                     <a href="/about" class="nav-link"> About me </a>
-                  </li><li class="nav-item">
-
                   </li>
+
+                  <!-- Search bar -->
+                  <li class="nav-item">
+                    <form action="{% url 'search' %}" method="get" class="search_form_in_nav input-group-append row">
+
+
+
+                      {% if search_query != None %}
+                        <input type="text" name="query" value="{{ search_query }}" class="form-control col-8">
+                      {% else %}
+                        <input type="text" name="query" value="" class="form-control col-8">
+                      {% endif %}
+                      <button type="submit" value="Submit" class="btn btn-dark col-2">
+                        <i class="fa fa-search"></i>
+                      </button>
+
+                      <div class="spacer col-1"></div>
+
+                    </form>
+                  </li>
+
               </ul>
           </div>
         </nav>

@@ -46,3 +46,16 @@ img{
 .navbar-brand{
   font-size: 25px !important;
 }
+
+.nav-item > .search_form_in_nav{
+  float: left;
+  margin-top: 10px;
+}
+
+.search_form_in_nav > input[type="text"]{
+
+}
+
+.search_form_in_nav > button{
+  margin-left: 10px;
+}
