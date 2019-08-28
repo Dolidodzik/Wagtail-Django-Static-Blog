@@ -11,8 +11,8 @@ from wagtail.snippets.models import register_snippet
 from django import forms
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
-
-from django.shortcuts import render
+from wagtail.admin.edit_handlers import TabbedInterface, ObjectList
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 
 
@@ -91,6 +91,16 @@ class BlogPage(Page):
         StreamFieldPanel('body'),
     ]
 
+    @route(r'^search/$')
+    def post_search(self, request, *args, **kwargs):
+        search_query = request.GET.get('q', None)
+        self.posts = self.get_posts()
+        if search_query:
+            self.posts = self.posts.filter(body__contains=search_query)
+            self.search_term = search_query
+            self.search_type = 'search'
+        return Page.serve(self, request, *args, **kwargs)
+
 
 # Contact
 
@@ -130,5 +140,23 @@ class ContactPage(Page):
         MultiFieldPanel([
             FieldPanel('socials', widget=forms.CheckboxSelectMultiple),
         ], heading="Socials linked in contact page"),
+        StreamFieldPanel('body'),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+    ])
+
+
+# About page is "clone" of homepage, but under diffrent url, and its linked in topbar, unlike blog BlogPage
+class About(Page):
+
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+    ])
+
+    content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
     ]

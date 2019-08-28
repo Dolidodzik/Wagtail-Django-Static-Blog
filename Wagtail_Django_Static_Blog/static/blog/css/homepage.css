@@ -8,14 +8,14 @@
 }
 
 .blog-posts-spacer{
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .post{
   text-decoration: underline;
   color: inherit;
   cursor: pointer;
-  margin-top: 75px;
+  margin-top: 45px;
 }
 
 .post-header{

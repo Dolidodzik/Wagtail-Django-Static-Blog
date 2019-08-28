@@ -34,17 +34,6 @@
 
     <body class="{% block body_class %}{% endblock %}">
 
-        <!--<br/>
-        {% if user.is_authenticated %}
-          <p> Hello, {{ user.username }} </p> <br/>
-        {% else %}
-          <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}" > Log in </a>
-        {% endif %}
-        <br/><br/>
-
-        Logout: <a href="{% url 'logout' %}?next={{ request.get_full_path|urlencode }}"> Logout </a>
-        <br/><br/>-->
-
         <nav class="navbar navbar-expand-sm navbar-light bg-light top-nav">
           <a href="/" class="navbar-brand"> Amazing Blog </a>
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
@@ -56,6 +45,10 @@
                     <a href="/" class="nav-link"> Back to home </a>
                   </li><li class="nav-item">
                     <a href="/contact" class="nav-link"> Contact </a>
+                  </li><li class="nav-item">
+                    <a href="/about" class="nav-link"> About me </a>
+                  </li><li class="nav-item">
+
                   </li>
               </ul>
           </div>

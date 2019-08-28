@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}Search{% endblock %}
+
+{% block extra_css %}
+  <style>
+    .search_form{
+      margin-top: 100px;
+      margin-bottom: 60px;
+    }
+
+    .form-control{
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #000000;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border-radius: 0;
+
+      font-size: 20px;
+    }
+
+    .form-control:focus{
+      background: transparent;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+    button{
+      margin-left: 10px;
+    }
+
+    a{
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    img{
+      margin-bottom: 60px;
+    }
+
+  </style>
+
+  <script src="https://kit.fontawesome.com/ba3550c060.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <form action="{% url 'search' %}" method="get" class="search_form row">
+
+      <div class="spacer col-1"></div>
+
+      {% if search_query != None %}
+        <input type="text" name="query" value="{{ search_query }}" class="form-control col-7">
+      {% else %}
+        <input type="text" name="query" value="" class="form-control col-7">
+      {% endif %}
+      <button type="submit" value="Submit" class="btn btn-dark col-3">
+        Search!
+      </button>
+
+
+      <div class="spacer col-1"></div>
+
+    </form>
+
+
+    {% if search_results %}
+
+      {% for result in search_results %}
+        {% with result=result.specific %}
+          {% if result.miniature %}
+
+            <a href="{% pageurl result %}" class="post">
+              <h4>
+                {{ result }}
+              </h4>
+
+
+                {% image result.miniature fill-1000x1000 as miniature %}
+                <img src="{{ miniature.url }}" class="no-single-lightbox col-12" />
+
+            </a>
+
+          {% else %}
+            No results found
+          {% endif %}
+
+        {% endwith %}
+      {% endfor %}
+
+    {% elif search_query %}
+        No results found
+    {% else %}
+        Please type something into the search box
+    {% endif %}
+
+{% endblock %}
