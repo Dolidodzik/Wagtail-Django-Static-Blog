@@ -25,7 +25,7 @@ img{
 .top-nav{
   /* Positioning top navbar */
   position: fixed;
-  width: 100%;
+  width: 100vw;
   padding-right: 10%;
   z-index: 2;
 
@@ -46,7 +46,7 @@ img{
 
 .navbar-brand{
   font-size: 25px !important;
-  margin-bottom: 1vw;
+  margin-bottom:
 }
 
 .nav-item > .search_form_in_nav{

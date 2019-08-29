@@ -37,7 +37,7 @@
 
     <body class="{% block body_class %}{% endblock %}">
 
-        <nav class="navbar navbar-expand-sm navbar-light bg-light top-nav">
+        <nav class="navbar navbar-expand-md navbar-light bg-light top-nav">
           <a href="/" class="navbar-brand"> Amazing Blog </a>
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
               <span class="navbar-toggler-icon"></span>
@@ -59,15 +59,15 @@
 
 
                       {% if search_query != None %}
-                        <input type="text" name="query" value="{{ search_query }}" class="form-control col-9">
+                        <input type="text" name="query" value="{{ search_query }}" class="form-control col-8">
                       {% else %}
-                        <input type="text" name="query" value="" class="form-control col-9">
+                        <input type="text" name="query" value="" class="form-control col-8">
                       {% endif %}
                       <button type="submit" value="Submit" class="btn btn-dark col-2">
                         <i class="fa fa-search"></i>
                       </button>
 
-                      <div class="spacer col-1"></div>
+                      <div class="spacer col-1" style="clear: both;"></div>
 
                     </form>
                   </li>

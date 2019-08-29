@@ -6,28 +6,15 @@
 {% block extra_css %}
 
   <style>
-    .search_form{
-      margin-top: 100px;
-      margin-bottom: 60px;
-    }
 
     .form-control{
       background: transparent;
-      /*border: none;
-      border-bottom: 1px solid #000000;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-      border-radius: 0;*/
     }
 
     .form-control:focus{
       background: transparent;
       -webkit-box-shadow: none;
       box-shadow: none;
-    }
-
-    button{
-      margin-left: 10px;
     }
 
     a{
@@ -40,7 +27,36 @@
     }
 
     .search_form > input[type="text"]{
-      font-size: 20px;
+      font-size: 22px;
+    }
+
+    .search_form{
+      margin-top: 100px;
+      margin-bottom: 60px;
+    }
+
+    .container{
+      padding: 30px;
+      font-size: 22px;
+    }
+
+    button{
+      height: 100%;
+    }
+
+    .search_form > input[type="text"]{
+      margin-right: -10px;
+    }
+
+    /* Changing font-size to make higher resolutions look better */
+    @media screen and (min-width: 576px) and (max-width: 768px) {
+      .search_form{
+        margin-top: 140px;
+        margin-bottom: 75px;
+      }
+      .search_form > input[type="text"]{
+        font-size: 22px;
+      }
     }
 
   </style>
@@ -51,51 +67,57 @@
 
     <form action="{% url 'search' %}" method="get" class="search_form row">
 
-      <div class="spacer col-1"></div>
+      <div class="spacer col-1 col-sm-2"></div>
 
       {% if search_query != None %}
-        <input type="text" name="query" value="{{ search_query }}" class="form-control col-8">
+        <input type="text" name="query" value="{{ search_query }}" class="form-control col-7 col-sm-6">
       {% else %}
-        <input type="text" name="query" value="" class="form-control col-8">
+        <input type="text" name="query" value="" class="form-control col-7 col-sm-6">
       {% endif %}
-      <button type="submit" value="Submit" class="btn btn-dark col-2">
-        <i class="fa fa-search"></i>
-      </button>
+
+      <div class="col-3 col-sm-2">
+        <button type="submit" value="Submit" class="btn btn-dark col-12 col-12 ml-2">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
 
 
-      <div class="spacer col-1"></div>
+      <div class="spacer col-1 col-sm-2"></div>
 
     </form>
 
+    <div class="results row">
+      {% if search_results %}
 
-    {% if search_results %}
+        {% for result in search_results %}
+          {% with result=result.specific %}
+            {% if result.miniature %}
 
-      {% for result in search_results %}
-        {% with result=result.specific %}
-          {% if result.miniature %}
+              <a href="{% pageurl result %}" class="post col-12 col-sm-6">
 
-            <a href="{% pageurl result %}" class="post">
-              <h4>
-                {{ result }}
-              </h4>
-
+                <h2>
+                  {{ result }}
+                </h2>
 
                 {% image result.miniature fill-1000x1000 as miniature %}
-                <img src="{{ miniature.url }}" class="no-single-lightbox col-12" />
+                <img src="{{ miniature.url }}" class="no-single-lightbox" />
 
-            </a>
+              </a>
 
-          {% else %}
-            No results found
-          {% endif %}
+            {% else %}
+              <div class="col-12">No results found</div>
+            {% endif %}
 
-        {% endwith %}
-      {% endfor %}
+          {% endwith %}
+        {% endfor %}
+      </div>
 
-    {% elif search_query %}
-        No results found
-    {% else %}
-        Please type something into the search box
-    {% endif %}
+    <div class="row">
+      {% elif search_query %}
+        <div class="col-12"> No results found </div>
+      {% else %}
+        <div class="col-12"> Please type something into the search box </div>
+      {% endif %}
+    </div>
 
 {% endblock %}
