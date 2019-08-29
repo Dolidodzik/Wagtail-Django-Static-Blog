@@ -21,7 +21,7 @@
         {% for block in blocks %}
             {% if block.block_type == 'heading' %}
               <header class="row">
-                <h2 class="heading col-12"> {{ block.value }} </h2>
+                <h1 class="heading col-12"> {{ block.value }} </h1>
               </header>
             {% elif block.block_type == 'image' %}
               {% image block.value original as image %}
@@ -36,27 +36,31 @@
         {% endfor %}
       {% endwith %}
 
-      <div class="blog-posts-spacer"></div>
+      <div class="blog-posts-spacer">
+        <h2> Below you can look at my posts: </h2>
+      </div>
 
-      {% for post in page.get_children.specific %}
+      <div class="row posts">
+        {% for post in page.get_children.specific %}
 
-        <!-- Preventing showing contact and about pages as one of posts -->
-        {% if post.url == "/contact/" or post.url == "/about/" %}
-        {% else %}
-          <a href="{% pageurl post %}" class="post row">
-            <header class="col-12 post-header">
-              <h3> {{ post.title }} </h3>
-            </header>
-            {% image post.miniature fill-1000x1000 as miniature %}
-            <img src="{{ miniature.url }}" class="no-single-lightbox col-12" />
-          </a>
+          <!-- Preventing showing contact and about pages as one of posts -->
+          {% if post.url == "/contact/" or post.url == "/about/" %}
+          {% else %}
+            <a href="{% pageurl post %}" class="post col-12 col-sm-6">
+              <header class="col-12 post-header">
+                <h2> {{ post.title }} </h2>
+              </header>
+              {% image post.miniature fill-1000x1000 as miniature %}
+              <img src="{{ miniature.url }}" class="no-single-lightbox" />
+            </a>
 
-          <!-- Blocks if needed -->
-          {% for block in post.body %}
-          {% endfor %}
-        {% endif %}
+            <!-- Blocks if needed -->
+            {% for block in post.body %}
+            {% endfor %}
+          {% endif %}
 
-      {% endfor %}
+        {% endfor %}
+      </div>
 
     </div>
 
