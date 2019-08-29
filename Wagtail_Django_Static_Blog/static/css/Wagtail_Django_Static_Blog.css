@@ -41,7 +41,11 @@ img{
 .nav-link{
   color: black !important;
   font-size: 22px !important;
-  margin-bottom: 1vw;
+  margin-top: 15px;
+}
+
+.last-nav-item{
+  margin-top: 20px;
 }
 
 .navbar-brand{
@@ -49,15 +53,39 @@ img{
   margin-bottom:
 }
 
-.nav-item > .search_form_in_nav{
+.search_form_in_nav{
   float: left;
-  margin-top: 2px;
-}
-
-.search_form_in_nav > input[type="text"]{
-
+  margin-top: 5px;
 }
 
 .search_form_in_nav > button{
   margin-left: 10px;
+  float: left;
+  height: 100% !important;
+}
+
+.search_form_in_nav > input[type="text"]{
+  width: 90%;
+}
+
+/* Changing font-size and margins to make higher resolutions look better */
+@media screen and (min-width: 576px) and (max-width: 768px) {
+
+  /* Making search icon, and search input bigger/incresing font size */
+  .search_form_in_nav > input[type="text"]{
+    font-size: 21px;
+  }
+  .nav-search-icon{
+    font-size: 21px;
+    height: 100% !important;;
+  }
+  .fake-letter{
+    color: white;
+    font-size: 21px;
+  }
+
+  .last-nav-item{
+    margin-top: 10px;
+  }
+
 }

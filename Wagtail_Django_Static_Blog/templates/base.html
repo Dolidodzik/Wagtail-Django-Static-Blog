@@ -53,23 +53,21 @@
                   </li>
 
                   <!-- Search bar -->
-                  <li class="nav-item">
-                    <form action="{% url 'search' %}" method="get" class="search_form_in_nav input-group-append row">
+                  <li class="nav-item last-nav-item">
 
+                    <form action="{% url 'search' %}" method="get" class="search_form_in_nav input-group-append" target="_blank">
 
+                      <input type="text" name="query" value="" class="form-control">
 
-                      {% if search_query != None %}
-                        <input type="text" name="query" value="{{ search_query }}" class="form-control col-8">
-                      {% else %}
-                        <input type="text" name="query" value="" class="form-control col-8">
-                      {% endif %}
-                      <button type="submit" value="Submit" class="btn btn-dark col-2">
-                        <i class="fa fa-search"></i>
+                      <button type="submit" value="Submit" class="btn btn-dark">
+                        <span class="fake-letter"></span>
+                        <i class="fa fa-search nav-search-icon"></i>
                       </button>
 
-                      <div class="spacer col-1" style="clear: both;"></div>
+                      <div class="spacer" style="clear: both;"></div>
 
                     </form>
+
                   </li>
 
               </ul>
@@ -82,7 +80,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <div class="container text-center">
           {% wagtailuserbar %}
-
           {% block content %}{% endblock %}
         </div>
 
