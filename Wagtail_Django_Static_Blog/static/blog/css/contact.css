@@ -7,8 +7,13 @@
 .socials{
   font-size: 25px;
   text-align: center;
+  margin-top: 60px;
 }
 
 .social-wrapper > a{
   color: inherit;
+}
+
+.social-wrapper{
+  margin-top: 20px;
 }
