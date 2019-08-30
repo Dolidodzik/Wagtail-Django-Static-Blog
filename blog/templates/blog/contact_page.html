@@ -42,18 +42,12 @@
       {% with socials=page.socials.all %}
         {% if socials %}
             {% for social in socials %}
-              <a href="{{social.link}}" class="social-wrapper row">
+              <a href="{{social.link}}" class="social-wrapper" target="_blank">
 
-                <div class="col-3 spacer"></div>
+                {% image social.icon original style="vertical-align: middle" class="no-single-lightbox social-icon" %}
+                <b class="social-name"> {{ social.name }} </b>
 
-                {% image social.icon original style="vertical-align: middle" class="no-single-lightbox col-2 social-icon" %}
-                <b class="social-name col-5"> {{ social.name }} </b>
-
-
-
-                <div class="col-2 spacer"></div>
-
-              </a>
+              </a><br/>
             {% endfor %}
         {% endif %}
       {% endwith %}
