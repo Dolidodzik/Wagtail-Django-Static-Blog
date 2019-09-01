@@ -36,6 +36,8 @@ img{
   -webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.45);
   box-shadow: 0 5px 5px rgba(182, 182, 182, 0.45);
 
+  margin-top: 0 !important;
+
 }
 
 .nav-link{
@@ -89,7 +91,36 @@ img{
   }
 
   .container{
-    font-size: 18px;
+    font-size: 19px;
+  }
+
+  .heading{
+    margin-top: 130px;
+    margin-bottom: 75px;
+  }
+
+}
+
+@media screen and (min-width: 765px) and (max-width: 992px) {
+
+  .navbar-brand > span{
+    font-size: 30px;
+  }
+  .nav-link{
+    font-size: 25px !important;
+  }
+
+  /* Making search icon, and search input bigger/incresing font size */
+  .search_form_in_nav > input[type="text"]{
+    font-size: 23px;
+  }
+  .nav-search-icon{
+    font-size: 23px;
+    height: 100% !important;;
+  }
+  .fake-letter{
+    color: white;
+    font-size: 23px;
   }
 
 }
