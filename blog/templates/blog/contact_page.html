@@ -14,7 +14,6 @@
 
   <div class="page-container">
 
-    <div class="contact-margin-top"></div>
     <div class="row"></div>
 
     {% with blocks=self.body %}
@@ -37,17 +36,25 @@
     {% endwith %}
 
 
-    <!-- Categories -->
-    <section class="socials">
+    <!-- Socials -->
+    <section class="socials row">
       {% with socials=page.socials.all %}
         {% if socials %}
             {% for social in socials %}
-              <a href="{{social.link}}" class="social-wrapper" target="_blank">
 
-                {% image social.icon original style="vertical-align: middle" class="no-single-lightbox social-icon" %}
-                <b class="social-name"> {{ social.name }} </b>
+              <div class="offset-1 offset-sm-0 spacer"></div>
 
-              </a><br/>
+              <a href="{{social.link}}" class="social-wrapper col-10 col-sm-5 offset-sm-1" target="_blank">
+
+                  {% image social.icon original style="vertical-align: middle" class="no-single-lightbox social-icon" %} <br/>
+                  <b class="social-name"> {{ social.name }} </b>
+
+              </a>
+
+              <div class="offset-1 offset-sm-0 spacer"></div>
+
+
+
             {% endfor %}
         {% endif %}
       {% endwith %}

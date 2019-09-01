@@ -79,7 +79,7 @@ img{
   }
   .nav-search-icon{
     font-size: 21px;
-    height: 100% !important;;
+    height: 100% !important;
   }
   .fake-letter{
     color: white;
@@ -121,6 +121,25 @@ img{
   .fake-letter{
     color: white;
     font-size: 23px;
+  }
+
+  img{
+    margin-bottom: 35px;
+    margin-top: 20px;
+  }
+
+  .top-nav{
+    padding-bottom: 15px;
+    padding-top: 20px;
+  }
+
+  .container{
+    font-size: 20px;
+  }
+
+  .heading{
+    margin-top: 150px;
+    margin-bottom: 75px;
   }
 
 }

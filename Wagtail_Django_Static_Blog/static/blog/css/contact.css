@@ -1,16 +1,9 @@
 /* Contact */
 .socials{
-  font-size: 25px;
+  font-size: 27px;
   text-align: center;
   margin-top: 60px;
-}
-
-.social-wrapper > a{
-  color: inherit;
-}
-
-.social-wrapper{
-  margin-top: 20px;
+  padding-bottom: 400px;
 }
 
 .social-icon{
@@ -21,5 +14,29 @@
 
 .social-name{
   display: inline-block;
-  margin: 20px 35px;
+  margin: 10px 25px;
+}
+
+.social-wrapper{
+  padding-top: 12%;
+  padding-bottom: 12%;
+
+  margin-top: 50px;
+
+  color: inherit;
+  text-decoration: none !important;
+
+  -moz-box-shadow:0 5px 5px rgba(182, 182, 182, 0.45);
+  -webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.45);
+  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.45);
+}
+
+@media screen and (min-width: 576px) {
+
+}
+
+@media screen and (min-width: 768px) {
+  .social-wrapper > br{
+    display: none;
+  }
 }

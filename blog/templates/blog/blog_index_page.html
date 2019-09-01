@@ -26,7 +26,7 @@
             {% elif block.block_type == 'image' %}
               {% image block.value original as image %}
               <div class="row">
-                <img src="{{image.url}}" class="single-image" />
+                <img src="{{image.url}}" class="single-image col-12" />
               </div>
             {% else %}
                <section class="block-{{ block.block_type }} row">
