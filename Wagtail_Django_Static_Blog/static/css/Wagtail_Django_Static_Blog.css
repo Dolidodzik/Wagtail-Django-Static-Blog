@@ -145,3 +145,19 @@ img{
   }
 
 }
+
+@media screen and (min-width: 992px) {
+  .heading{
+    margin-top: 150px;
+    margin-bottom: 110px;
+  }
+  .container{
+    font-size: 22px;
+    padding-bottom: 500px;
+    padding: 45px;
+  }
+  img{
+    margin-bottom: 55px;
+    margin-top: 40px;
+  }
+}

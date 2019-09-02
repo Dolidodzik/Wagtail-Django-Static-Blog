@@ -2,7 +2,6 @@
 .socials{
   font-size: 27px;
   text-align: center;
-  margin-top: 60px;
 }
 
 .social-icon{
@@ -30,12 +29,35 @@
   box-shadow: 0 5px 5px rgba(182, 182, 182, 0.45);
 }
 
-@media screen and (min-width: 576px) {
+.block-paragraph{
+  font-size: 22px;
+}
 
+@media screen and (min-width: 576px) {
+  .block-paragraph{
+    font-size: 25px;
+  }
+  .socials{
+    margin-top: 30px;
+  }
 }
 
 @media screen and (min-width: 768px) {
-  .social-wrapper > br{
-    display: none;
+  .heading{
+    font-size: 37px;
+  }
+  .socials{
+    font-size: 32px;
+    margin-top: 60px;
+  }
+  .block-paragraph{
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .social-wrapper{
+    padding-top: 2%;
+    padding-bottom: 2%;
   }
 }

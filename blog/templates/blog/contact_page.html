@@ -25,11 +25,11 @@
           {% elif block.block_type == 'image' %}
             {% image block.value original as image %}
             <div class="row">
-              <img src="{{image.url}}" class="single-image" />
+              <img src="{{image.url}}" class="single-image col-12" />
             </div>
           {% else %}
              <section class="block-{{ block.block_type }} row">
-               {{ block }}
+               <div class="col-12">{{ block }}</div>
              </section>
           {% endif %}
       {% endfor %}
@@ -44,9 +44,9 @@
 
               <div class="offset-1 offset-sm-0 spacer"></div>
 
-              <a href="{{social.link}}" class="social-wrapper col-10 col-sm-5 offset-sm-1" target="_blank">
+              <a href="{{social.link}}" class="social-wrapper col-10 col-sm-5 col-lg-3 offset-sm-1" target="_blank">
 
-                  {% image social.icon original style="vertical-align: middle" class="no-single-lightbox social-icon" %} <br/>
+                  {% image social.icon original style="vertical-align: middle" class="no-single-lightbox social-icon" %}
                   <b class="social-name"> {{ social.name }} </b>
 
               </a>
