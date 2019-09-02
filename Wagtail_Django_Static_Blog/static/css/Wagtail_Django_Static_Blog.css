@@ -27,7 +27,7 @@ img{
   position: fixed;
   width: 100vw;
   padding-right: 10%;
-  z-index: 2;
+  z-index: 10;
 
   /* Styling */
   padding-left: 30px;
@@ -92,6 +92,7 @@ img{
 
   .container{
     font-size: 19px;
+    padding-bottom: 200px;
   }
 
   .heading{
@@ -135,6 +136,7 @@ img{
 
   .container{
     font-size: 20px;
+    padding-bottom: 400px;
   }
 
   .heading{
