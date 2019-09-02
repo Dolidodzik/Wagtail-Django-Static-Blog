@@ -20,7 +20,7 @@
 }
 
 .post-header{
-  margin-bottom: 8px;
+
 }
 
 .single-image{
@@ -32,4 +32,8 @@
   .page-container{
     padding: 35px;
   }
+}
+
+@media screen and (min-width: 992px) {
+  
 }

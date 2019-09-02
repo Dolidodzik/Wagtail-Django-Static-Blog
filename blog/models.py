@@ -21,7 +21,6 @@ class BlogIndexPage(Page):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
     ])
 
     content_panels = Page.content_panels + [
