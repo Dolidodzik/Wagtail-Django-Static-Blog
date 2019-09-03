@@ -29,25 +29,7 @@
             <img src="{{image.url}}" class="single-image" />
           </div>
         {% elif block.block_type == 'gallery' %}
-
-          <div class="image-gallery-container row">
-            <h3 class="col-12"> Gallery: </h3>
-            {% if block.value %}
-              {% for image_instance in block.value %}
-                {% if image_instance.block_type == 'image' %}
-
-                    <div class="image-wrapper col-4">
-                      {% image image_instance.value original as img %}
-                      {% image image_instance.value fill-1000x1000 as img_miniature %}
-                      <img class="no-single-lightbox gallery-image" src="{{ img_miniature.url }}"
-                        data-imagebox="gallery" data-imagebox-src="{{ img.url }}">
-                    </div>
-
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-          </div>
-
+        <!-- Gallery will be moved to separate page -->
         {% else %}
           <section class="block-{{ block.block_type }}">
             {{ block }}
@@ -56,14 +38,16 @@
 
       {% endfor %}
     </main>
+    <div style="clear: both;"></div>
 
     <!-- Categories -->
     <section class="categories row">
       {% with categories=page.categories.all %}
         {% if categories %}
-          <h3 class="col-12"> Categories of this post is: </h3>
+          <h3 class="col-12"> Categories of this post are: </h3>
             {% for category in categories %}
-              <li style="display: inline" class="col-12 category">
+
+              <li style="display: inline" class="col-12 col-md-6 col-lg-4 category">
 
                   {% image category.icon fill-48x48 style="vertical-align: middle" class="no-single-lightbox" %}
                   <b> {{ category.name }} </b>
@@ -76,11 +60,13 @@
 
     <!-- Tags -->
     <section class="tags row">
-      <div class="col-12">
+      <div class="tags-wrapper col-12">
         {% if page.tags.all.count %}
           <h3>Tags</h3>
           {% for tag in page.tags.all %}
-            <a href=""> #{{ tag }} </a>
+            <span class="tag">
+              #{{ tag }}
+            </span>
           {% endfor %}
         {% endif %}
       </div>

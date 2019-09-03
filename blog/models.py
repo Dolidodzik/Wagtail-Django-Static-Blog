@@ -74,11 +74,6 @@ class BlogPage(Page):
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
-
-        ('gallery', blocks.StreamBlock(
-            [
-                ('image', ImageChooserBlock()),
-            ], label='image gallery' )),
     ])
 
     content_panels = Page.content_panels + [
@@ -90,15 +85,7 @@ class BlogPage(Page):
         StreamFieldPanel('body'),
     ]
 
-    @route(r'^search/$')
-    def post_search(self, request, *args, **kwargs):
-        search_query = request.GET.get('q', None)
-        self.posts = self.get_posts()
-        if search_query:
-            self.posts = self.posts.filter(body__contains=search_query)
-            self.search_term = search_query
-            self.search_type = 'search'
-        return Page.serve(self, request, *args, **kwargs)
+
 
 
 # Contact
@@ -159,3 +146,35 @@ class About(Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
     ]
+
+# WORKING WITH IT
+# Gallery page, preview of this page will be displayed as slider
+'''class GalleryPage(Page):
+
+    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
+    categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
+
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+    ])
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('tags'),
+            FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
+        ], heading="Blog information"),
+        StreamFieldPanel('body'),
+    ]
+
+# Every image in gallery will be instance of this class
+class GalleryImage(Orderable):
+    page = ParentalKey(GalleryPage, on_delete=models.CASCADE, related_name='gallery_images')
+    image = models.ForeignKey(
+        'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
+    )
+
+    panels = [
+        ImageChooserPanel('image'),
+    ]'''

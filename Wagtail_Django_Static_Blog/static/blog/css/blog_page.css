@@ -5,11 +5,6 @@
   margin-top: 50px;
 }
 
-.image-gallery-container{
-  margin-top: 40px;
-  margin-bottom: 25px;
-}
-
 .tags{
   margin-top: 45px;
   margin-bottom: 60px;
@@ -28,4 +23,32 @@
 
 .category > img{
   margin-right: 5px;
+}
+
+.tag{
+  text-decoration: underline;
+  color: #007bff;
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .categories{
+    margin-top: 75px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .categories{
+    margin-top: 125px;
+  }
+
+  .category{
+    margin: 0;
+    padding: 0;
+  }
+
+  .heading{
+    margin-top: 160px;
+  }
+
 }
