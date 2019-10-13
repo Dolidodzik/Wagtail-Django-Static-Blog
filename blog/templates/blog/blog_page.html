@@ -17,12 +17,14 @@
 
     <!-- Blocks, accutaly main content here -->
     <main class="post-body">
+
       {% for block in page.body %}
 
         {% if block.block_type == 'heading' %}
           <header class="row">
             <h2 class="heading col-12">{{ block.value }}</h2>
           </header>
+
         {% elif block.block_type == 'image' %}
           {% image block.value original as image %}
           <div class="row">
@@ -39,6 +41,33 @@
       {% endfor %}
     </main>
     <div style="clear: both;"></div>
+
+    <!-- Gallery should be under heading -->
+    <section class="gallery">
+      <a href = "">
+        <h2> Go to gallery! </h2>
+      </a>
+
+      <!-- Showing gallery -->
+      <div id="gallery-images">
+        {% for image_obj in slider_images %}
+          {% if image_obj.ShowInSlider %}
+
+            <!-- Only one div can have showing class --->
+            {% if forloop.counter == 1 %}
+              <div class="slide showing">
+                {% image image_obj.image fill-200x200 class="no-single-lightbox col-3" %}
+              </div>
+            {% else %}
+              <div class="slide">
+                {% image image_obj.image fill-200x200 class="no-single-lightbox col-3" %}
+              </div>
+            {% endif %}
+
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
 
     <!-- Categories -->
     <section class="categories row">
@@ -83,5 +112,18 @@
 
 
 {% include 'blog/apply_lightbox_to_images.html' %}
+
+<script>
+
+  var slides = document.querySelectorAll('#gallery-images .slide');
+  var currentSlide = 0;
+  var slideInterval = setInterval(nextSlide,2000);
+  console.log(slides[0])
+  function nextSlide() {
+      slides[currentSlide].className = 'slide';
+      currentSlide = (currentSlide+1)%slides.length;
+      slides[currentSlide].className = 'slide showing';
+  }
+</script>
 
 {% endblock %}

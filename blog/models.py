@@ -85,6 +85,13 @@ class BlogPage(Page):
         StreamFieldPanel('body'),
     ]
 
+    def get_context(self, request):
+        context = super(BlogPage, self).get_context(request)
+        context['slider_images'] = self.get_children().specific().first().gallery_images.all()
+        print(type(context['slider_images']))
+        print(context['slider_images'])
+        return context
+
 
 
 
@@ -147,26 +154,20 @@ class About(Page):
         StreamFieldPanel('body'),
     ]
 
-# WORKING WITH IT
+
 # Gallery page, preview of this page will be displayed as slider
-'''class GalleryPage(Page):
+class GalleryPage(Page):
 
-    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
-    categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
-
+    # label = "Heading, tags and categories will be auto-inserted"
     body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('paragraph', blocks.RichTextBlock(label = "Paragraph")),
     ])
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            FieldPanel('tags'),
-            FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
-        ], heading="Blog information"),
         StreamFieldPanel('body'),
+        InlinePanel('gallery_images'),
     ]
+
 
 # Every image in gallery will be instance of this class
 class GalleryImage(Orderable):
@@ -175,6 +176,12 @@ class GalleryImage(Orderable):
         'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
     )
 
+    # If true, image will be used in slider in parent page
+    ShowInSlider = models.BooleanField(null=True, blank=True)
+
     panels = [
-        ImageChooserPanel('image'),
-    ]'''
+        MultiFieldPanel([
+            ImageChooserPanel('image'),
+            FieldPanel('ShowInSlider', widget=forms.CheckboxInput()),
+        ])
+    ]
