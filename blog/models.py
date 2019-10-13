@@ -88,8 +88,7 @@ class BlogPage(Page):
     def get_context(self, request):
         context = super(BlogPage, self).get_context(request)
         context['slider_images'] = self.get_children().specific().first().gallery_images.all()
-        print(type(context['slider_images']))
-        print(context['slider_images'])
+        context['url'] = self.get_children().specific().first().url
         return context
 
 

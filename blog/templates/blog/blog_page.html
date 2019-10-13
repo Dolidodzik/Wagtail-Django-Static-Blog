@@ -44,29 +44,30 @@
 
     <!-- Gallery should be under heading -->
     <section class="gallery">
-      <a href = "">
+
+      <a href = "{{ url }}">
         <h2> Go to gallery! </h2>
-      </a>
 
-      <!-- Showing gallery -->
-      <div id="gallery-images">
-        {% for image_obj in slider_images %}
-          {% if image_obj.ShowInSlider %}
+        <!-- Showing gallery -->
+        <div id="gallery-images">
+          {% for image_obj in slider_images %}
+            {% if image_obj.ShowInSlider %}
 
-            <!-- Only one div can have showing class --->
-            {% if forloop.counter == 1 %}
-              <div class="slide showing">
-                {% image image_obj.image fill-200x200 class="no-single-lightbox col-3" %}
-              </div>
-            {% else %}
-              <div class="slide">
-                {% image image_obj.image fill-200x200 class="no-single-lightbox col-3" %}
-              </div>
+              <!-- Only one div can have showing class --->
+              {% if forloop.counter == 1 %}
+                <div class="slide showing">
+                  {% image image_obj.image fill-200x200 class="no-single-lightbox col-3" %}
+                </div>
+              {% else %}
+                <div class="slide">
+                  {% image image_obj.image fill-200x200 class="no-single-lightbox col-3" %}
+                </div>
+              {% endif %}
+
             {% endif %}
-
-          {% endif %}
-        {% endfor %}
-      </div>
+          {% endfor %}
+        </div>
+      </a>
     </section>
 
     <!-- Categories -->
@@ -117,7 +118,7 @@
 
   var slides = document.querySelectorAll('#gallery-images .slide');
   var currentSlide = 0;
-  var slideInterval = setInterval(nextSlide,2000);
+  var slideInterval = setInterval(nextSlide,1500);
   console.log(slides[0])
   function nextSlide() {
       slides[currentSlide].className = 'slide';

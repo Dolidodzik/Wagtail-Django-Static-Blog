@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %} template-blogindexpage {% endblock %}
+
+<!-- Extra css -->
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static "blog/css/homepage.css" %}"/>
+  <style>
+    .page-container{
+      padding-top: 150px;
+      margin: 0;
+    }
+    img{
+      margin: 0;
+      margin-top: 20px;
+    }
+  </style>
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+
+  <div class="page-container">
+
+      <div class="row">
+      </div>
+
+      {% for image_obj in page.gallery_images.all %}
+        {% image image_obj.image fill-1000x1000 class=" col-11 col-lg-3" data-imagebox="gallery" %}
+      {% endfor %}
+
+    </div>
+
+
+
+{% endblock %}
